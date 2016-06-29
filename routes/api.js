@@ -4,7 +4,7 @@ const express = require('express');
 
 let router = express.Router();
 
-router.use('/pizzas', require('./pizzas'));
-router.use('/chefs', require('./chefs'));
+router.use('/residents', require('./residents'));
+router.use('/apartments', require('./apartments'));
 
 module.exports = router;
