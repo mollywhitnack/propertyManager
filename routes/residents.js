@@ -43,32 +43,26 @@ router.route('/:id')
   });
 });
 
+router.put('/:id/addAge', (req, res)=>{
+  Resident.findById(req.params.id, (err, resident)=>{
+     if(err || !resident){
+      return res.sataut(400).send(err || {error: 'Resident not found'});
+     }
+     resident.addAge((err, savedResident)=>{
+       res.send();
+     });
+  });
+});
+
 //ap id: 5774554153af0cd707cea8af
 // res id: 577454e253af0cd707cea8ac
 
 //577454e253af0cd707cea8ac/addApartment/5774554153af0cd707cea8af
 
 //add/update apartment to resident
-router.put('/:residentId/addApartment/:apartmentId', (req, res)=>{
-  Resident.findById(req.params.residentId, (err , resident)=>{
-    if(err || !resident) return res.satus(400).send(err || 'resident not found');
-    resident.apartment = req.params.apartmentId;
-    resident.save((err, savedresident)=>{
-      res.status(err? 400: 200).send(err || savedresident)
-    });
-  });
-});
 
-//remove resident from apartment
-router.put('/:residentId/removeApartment/', (req, res)=>{
-  Resident.findById(req.params.residentId, (err , resident)=>{
-    if(err || !resident) return res.satus(400).send(err || 'resident not found');
-    resident.apartment = undefined;
-    resident.save((err, savedresident)=>{
-      res.status(err? 400: 200).send(err || savedresident)
-    });
-  });
-});
+
+
 
 module.exports = router;
 

@@ -8,10 +8,18 @@ let residentSchema = new mongoose.Schema({
   gender: { type: String, default: 'na'},
   createdAt: { type: Date, default: Date.now },
   email: { type: String, match: /^\w+@\w+\.+\w+$/, required: true, trim: true, lowercase: true},
-  apartment: {type: mongoose.Schema.Types.ObjectId, ref: 'Apartment'}
+  //apartment: {type: mongoose.Schema.Types.ObjectId, ref: 'Apartment'}
 });
 
+let Resident;
+//dont use arorw function becase we want 'this' document
+residentSchema.methods.addAge = function (cb){
+  console.log("this: ", this);
+  this.age++;
+  this.save(cb);
+};
 
-let Resident =  mongoose.model('Resident', residentSchema);
+
+Resident =  mongoose.model('Resident', residentSchema);
 
 module.exports = Resident;
