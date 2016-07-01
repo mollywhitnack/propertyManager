@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Show Apartment</title>
+</head>
+<body ng-app='myApp' ng-controller='showApartmentCtrl'>
+<div class = "container">
+
+<h1>{{apartment.address}} </h1>
+<div>Description: {{apartment.description}}</div>
+<div>Max Occupancy: {{apartment.maxOccupancy}}</div>
+<div>resdient id:
+  <span ng-repeat = 'name in apartment.residents track by $index' >{{name}}, </span>
+</div>
+<hr>
+
+<div>Move 
+<select name = "residents">
+  <option ng-repeat = 'resident in residents track by $index' value="{{resident.name}}">{{resident.name}}</option> 
+</select><span>  into {{apartment.address}} </span>
+<button class = "btn btn-primary" ng-click = 'addResidentToApartment(apartment, resident._id)'>Submit</button>
+</div>
+
+<hr>
+
+<div>Move 
+<select name = "residents">
+  <option ng-repeat = '' value="{{resident.name}}">people in apt</option> 
+</select><span>  out of {{apartment.address}} </span>
+<button class = "btn btn-primary">Submit</button>
+</div>
+
+</div>
+</body>
+</html>

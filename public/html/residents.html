@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resident List</title>
+</head>
+<body ng-app='myApp' ng-controller='residentListCtrl'>
+<div class = "container">
+  <h1>Resident List</h1>
+
+  <ul>
+    <li ng-repeat = 'resident in residents track by $index'>
+      <a ui-sref = 'showResident({residentId: resident._id})'>
+        {{resident.name}}
+      </a>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

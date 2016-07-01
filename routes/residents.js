@@ -54,15 +54,6 @@ router.put('/:id/addAge', (req, res)=>{
   });
 });
 
-//ap id: 5774554153af0cd707cea8af
-// res id: 577454e253af0cd707cea8ac
-
-//577454e253af0cd707cea8ac/addApartment/5774554153af0cd707cea8af
-
-//add/update apartment to resident
-
-
-
 
 module.exports = router;
 
