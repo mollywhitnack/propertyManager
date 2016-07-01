@@ -3,7 +3,7 @@
 var app = angular.module('myApp');
 
 app.controller('mainCtrl', function($scope, Resident, Apartment) {
-  Resident.getAll()
+ /* Resident.getAll()
     .then(res =>{
       $scope.residents = res.data;
       console.log("$scope.residents:", $scope.residents);
@@ -11,6 +11,15 @@ app.controller('mainCtrl', function($scope, Resident, Apartment) {
     .catch(err =>{
       console.log("err: ", err);
     })
+
+    Apartment.getAll()
+    .then(res =>{
+      $scope.apartments = res.data;
+      console.log("$scope.apartments:", $scope.apartments);
+    })
+    .catch(err =>{
+      console.log("err: ", err);
+    })*/
 });
 
 app.controller('apartmentListCtrl', function($scope, Apartment) {
@@ -73,14 +82,35 @@ app.controller('showApartmentCtrl', function($scope, Apartment, $stateParams) {
   console.log('showApartmentCtrl!');
   console.log('$stateParams:', $stateParams);   //this will be apt id
 
+  $scope.currentResidents = [];
+  $scope.availableResidents = [];
   //or w/e my func is called
   Apartment.getById($stateParams.apartmentId)
     .then(res =>{
       $scope.apartment = res.data;
+      getCurrentResidents()
     })
 
-  $scope.addResidentToApartment = (apartment, resId) =>{
-    Apartment.addResident(apartment, resId)
+  function getCurrentResidents(){
+    console.log("$scope.residents:", $scope.residents);
+    for(var i =0; i< $scope.apartment.residents.length; i++){
+      for(var j = 0; j< $scope.residents.length; j++){
+        if($scope.apartment.residents[i] === $scope.residents[j]._id){
+          $scope.currentResidents.push($scope.residents[j])
+          console.log("--------in apt------:", $scope.residents[j]);
+        }
+        else{
+          console.log("----aviable------:", $scope.residents[j]);
+          $scope.availableResidents.push($scope.residents[j]);
+        }
+      }
+    }
+    console.log('$scope.CurrentResidents', $scope.currentResidents)
+  }
+
+  $scope.addResident = (resId)=>{
+  console.log("resId:", resId);
+  Apartment.addNewResident($scope.apartment._id, resId)
     .then()
     .catch(err=>{
       console.log("error: ", err );
@@ -99,6 +129,51 @@ app.controller('residentListCtrl', function($scope, Resident) {
     .catch(err =>{
       console.log("err: ", err);
     })
+
+    $scope.addResident = () =>{
+      Resident.addResident($scope.newItem)
+      .then(resident =>{
+        $scope.residents.push(resident);
+        $scope.newItem = {};
+      })
+      .catch(err=>{
+        console.log("error: ", err );
+      });
+    }
+
+
+  $scope.deleteResident = (ind, resident) =>{
+    console.log("resident:", resident)
+    Resident.deleteResident(resident._id)
+    .then(resident => {
+      //console.log("item to add", item);
+      $scope.residents.splice(ind,1);
+    })
+    .catch(err=>{
+      console.log("error: ", err );
+    });
+  }
+
+  $scope.showUpdateForm = (index, resident) =>{
+    console.log("index: ", index);
+    console.log("resident: ", resident);
+    $scope.showUpdate =true;
+    $scope.updateItem = resident;
+    $scope.updateIndex = index;
+  }
+
+  $scope.updateResident = () =>{
+    console.log("update res :", $scope.updateItem);
+    $scope.showUpdate =false;
+    Resident.updateResident($scope.updateItem._id, $scope.updateItem)
+    .then(resident =>{
+      console.log("update apt:" , $scope.updateItem._id, " , " , $scope.updateItem);
+    })
+    .catch(err=>{
+      console.log("error: ", err );
+    });
+  }
+
 });
 
 
@@ -111,6 +186,13 @@ app.controller('showResdientCtrl', function($scope, Resident, $stateParams) {
     .then(res =>{
       $scope.resident = res.data;
     })
+});
+
+app.controller('manageCtrl', function($scope, $stateParams, Apartment, Resident ) {
+  console.log('manageCtrl!');
+
+  //console.log("total Income", Apartment.allPropertyIncomes())
+  
 });
 
 

@@ -9,22 +9,24 @@ app.config(function($stateProvider, $urlRouterProvider){
         templateUrl: 'html/residents.html',
         controller: 'residentListCtrl'
       })
-
     .state('showResident', {
       url: '/residents/:residentId', 
       templateUrl: 'html/showResident.html', 
       controller: 'showResdientCtrl'
       })
-
     .state('apartments', {
         url: '/apartments', 
         templateUrl: 'html/apartments.html',
         controller: 'apartmentListCtrl'
       })
-    
     .state('showApartment', {
       url: '/apartments/:apartmentId', 
       templateUrl: 'html/showApartment.html', 
       controller: 'showApartmentCtrl'
+      })
+    .state('manage', {
+      url: '/manage', 
+      templateUrl: 'html/manage.html', 
+      controller: 'manageCtrl'
       })
 });

@@ -11,6 +11,35 @@ app.service('Resident', function($http, $q){
   this.getById = id =>{
     return $http.get(`/api/residents/${id}`);
   }
+  this.addResident = (resident) =>{
+    return $http.post(`/api/residents`, resident)
+      .then(res => {
+        return $q.resolve(res.data);
+      })
+      .catch(err => {   
+        console.log('err:', err);
+      })
+    };
+
+  this.deleteResident = (id) =>{
+    return $http.delete(`/api/residents/${id}`)
+      .then( () => {
+        return $q.resolve();
+      })
+      .catch(err => {   
+        console.log('err:', err);
+      })
+    };
+
+  this.updateResident = (id, resident) =>{
+      return $http.put(`/api/residents/${id}`, resident)
+      .then(res => {
+        return $q.resolve(resident);
+      })
+      .catch(err => {   
+        console.log('err:', err);
+      })
+    };
 
 });
 
@@ -54,10 +83,10 @@ app.service('Apartment', function($http, $q){
       })
     };
 
-  this.addResident = (apartment, resId) =>{
-      return $http.put(`/api/apartments/${apartment._id}/addResident/${resId}`, apartment)
+  this.addNewResident = (apId, resId) =>{
+      return $http.put(`/api/apartments/${apId}/addResident/${resId}`)
       .then(res => {
-        return $q.resolve(apartment);
+        return $q.resolve();
       })
       .catch(err => {   
         console.log('err:', err);
