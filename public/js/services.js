@@ -92,6 +92,16 @@ app.service('Apartment', function($http, $q){
         console.log('err:', err);
       })
     };
+
+  this.removeResident = (apId, resId) =>{
+      return $http.put(`/api/apartments/${apId}/removeResident/${resId}`)
+      .then(res => {
+        return $q.resolve();
+      })
+      .catch(err => {   
+        console.log('err:', err);
+      })
+    };
 });
 
 //in residents Resident.getAll()
