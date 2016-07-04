@@ -27,8 +27,8 @@
       <td >{{resident.gender}}</td>
       <td >{{resident.email}}</td>
       <td>
-        <button class="btn btn-danger" ng-click = 'deleteResident($index, apartment)'>Delete</button><br><br>
-        <button class="btn btn-warning" ng-click = 'showUpdateForm($index, apartment)'>Update</button>
+        <button class="btn btn-danger" ng-click = 'deleteResident($index, resident)'>Delete</button><br><br>
+        <button class="btn btn-warning" ng-click = 'showUpdateForm($index, resident)'>Update</button>
       </td>
       </tr>
     </tbody>
@@ -57,19 +57,19 @@
 <form ng-submit = 'updateResident()' ng-show = "showUpdate">
   <div class="form-group">
       <label >Name</label>
-      <input type="text" class="form-control" ng-model = 'updateRes.name' required>
+      <input type="text" class="form-control" ng-model = 'updateItem.name' required>
     </div>
     <div class="form-group">
       <label >Age</label>
-      <input type="text" class="form-control" ng-model = 'updateRes.age' required>
+      <input type="number" class="form-control" ng-model = 'updateItem.age' required>
     </div>
     <div class="form-group">
       <label >Gender</label>
-      <input type="number" class="form-control" ng-model = 'updateRes.gender' required>
+      <input type="text" class="form-control" ng-model = 'updateItem.gender' required>
     </div>
     <div class="form-group">
       <label >Email</label>
-      <input type="number" class="form-control" ng-model = 'updateItem.email' required>
+      <input type="text" class="form-control" ng-model = 'updateItem.email' required>
     </div>
     <div class = "text-center submitbt"><button type="submit" class="btn btn-success">Update resident Info</button></div>
   </form>

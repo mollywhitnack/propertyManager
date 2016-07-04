@@ -27,7 +27,7 @@ app.service('Resident', function($http, $q){
         return $q.resolve();
       })
       .catch(err => {   
-        console.log('err:', err);
+        console.log('err in serv:', err);
       })
     };
 

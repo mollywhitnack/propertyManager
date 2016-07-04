@@ -39,7 +39,7 @@ router.route('/:id')
   })
   .delete((req, res) =>{
   Resident.findByIdAndRemove(req.params.id, err =>{
-     res.status(err ? 400 : 200).send(err || resident);
+     res.status(err ? 400 : 200).send(err);
   });
 });
 
